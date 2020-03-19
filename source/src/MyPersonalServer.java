@@ -21,15 +21,15 @@ import java.util.logging.Logger;
  * @author Olivier Liechti
  * @modifs Maurice Lehmann
  */
-public class MyPersonalServer {
+public class MyPersonalServer implements Runnable {
 
     static final Logger LOG = Logger.getLogger(MyPersonalServer.class.getName());
-    private final int LISTEN_PORT = 2205;
+    private final int LISTEN_PORT = Protocol.PORT;
 
     /**
      * This method does the entire processing.
      */
-    public void start() {
+    public void run() {
         LOG.info("Starting server...");
 
         ServerSocket serverSocket = null;
@@ -63,13 +63,13 @@ public class MyPersonalServer {
 
                     LOG.log(Level.INFO, userInput);
                     switch (userInput){
-                        case "time":
+                        case Protocol.CMD_TIME:
                             sendTime(writer);
                             break;
-                        case "help":
+                        case Protocol.CMD_HELP:
                             sendHelp(writer);
                             break;
-                        case "joke":
+                        case Protocol.CMD_JOKE:
                             sendJoke(writer);
                             break;
                         default:
@@ -161,15 +161,4 @@ public class MyPersonalServer {
         LOG.log(Level.INFO, "  Remote Socket address: {0}", new Object[]{clientSocket.getRemoteSocketAddress()});
         LOG.log(Level.INFO, "            Remote port: {0}", new Object[]{Integer.toString(clientSocket.getPort())});
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
-
-        MyPersonalServer server = new MyPersonalServer();
-        server.start();
-    }
-
 }
