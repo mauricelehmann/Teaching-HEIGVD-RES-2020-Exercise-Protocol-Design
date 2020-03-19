@@ -4,7 +4,9 @@
 S'entrainer avec les fonctionnalités réseau de Java.
 
 ### Explication & Fonctionalités
-L'application se lance et boucle dans l'attente qu'un client se connecte (avec netcat : localhost 2205)
+L'application se lance et boucle dans l'attente qu'un client se connecte 
+ - avec netcat : localhost 2205
+ - Ou depuis un client, via la classe Client
 Lorsque la connection est établi, l'application envoi un message de bienvenue au client puis attend de sa part une commande :
 Trois commandes sont possible :
   - help : affiche l'aide
